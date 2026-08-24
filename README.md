@@ -1,10 +1,13 @@
 # Model
 
-A tiny base class for creating and validating **domain objects**.
+A tiny base class for validating **domain objects**.
+
+Backend code often passes plain objects everywhere, leaving validation and domain rules scattered across the application. `Model` gives meaningful concepts a small, explicit definition without turning them into complex entities.
+
 
 ## Usage
 
-```js
+```js id="6fpl8k"
 import { Model } from "./model.js";
 
 class User extends Model {
@@ -20,33 +23,34 @@ const user = User.create({
 });
 ```
 
-Models must be created with `.create()`:
+Nested objects are supported:
 
-```js
-new User({ name: "John", age: 25 });
-// TypeError
+```js id="gd5r4j"
+class UserCard extends Model {
+  static shape = {
+    user: {
+      name: String,
+      age: Number
+    }
+  };
+}
+
+const card = UserCard.create({
+  user: {
+    name: "John",
+    age: 25
+  }
+});
 ```
 
-This keeps validation at the boundary:
+Nested domain objects can also use other `Model` classes.
 
-```text
-raw data → Model.create() → validated domain object → application logic
-```
-
-A class is just a JavaScript mechanism. A domain object represents a meaningful concept in your application. `Model` provides a small, simple boundary for those concepts without turning them into complex enterprise entities or coupling them to persistence.
+`Model` validates input and creates small, composable domain objects. It does not handle persistence, databases, or complex entity management.
 
 ## Install
 
-Clone the repository:
-
-```bash
-git clone https://github.com/flowagi-eu/model.js
-```
-
-Then import `Model` directly:
-
-```js
-import { Model } from "./model.js";
+```bash id="v2z0z4"
+git clone https://github.com/your-user/model.git
 ```
 
 ## Compared
@@ -56,5 +60,4 @@ import { Model } from "./model.js";
 | Class-based        | **Yes** |  No |      Yes |       Yes |     Yes |     No |
 | Runtime validation | **Yes** | Yes |      Yes |       Yes |     Yes |    Yes |
 | Database / ORM     |      No |  No |      Yes |       Yes |     Yes |    Yes |
-
 
