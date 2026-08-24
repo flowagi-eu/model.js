@@ -1,6 +1,6 @@
 # Model
 
-A tiny base class for validated **domain objects**.
+A tiny base class for creating and validating **domain objects**.
 
 ## Usage
 
