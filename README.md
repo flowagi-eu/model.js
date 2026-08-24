@@ -61,6 +61,23 @@ git clone https://github.com/your-user/model.git
 | Runtime validation | **Yes** | Yes |      Yes |       Yes |     Yes |    Yes |
 | Database / ORM     |      No |  No |      Yes |       Yes |     Yes |    Yes |
 
+## Supported Types
+
+| Type Example  | Example                       |
+| ------------- | ----------------------------- |
+| `String`      | `name: String`                |
+| `Number`      | `count: Number`               |
+| `Boolean`     | `active: Boolean`             |
+| `Object`      | `data: Object`                |
+| `Array`       | `items: Array`                |
+| `Model`       | `user: User`                  |
+| Any class     | `date: Date`                  |
+| Nested shape  | `user: { name: String }`      |
+| `List(type)`  | `items: List(String)`         |
+| `List(class)` | `cards: List(UserCard)`       |
+| `List(shape)` | `items: List({ id: Number })` |
+
+
 
 ## Working with Web Components?
 Try [Flo Shapes](https://github.com/flowagi-eu/flo-plugin-shapes) instead.
