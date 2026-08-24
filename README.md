@@ -40,7 +40,7 @@ A class is just a JavaScript mechanism. A domain object represents a meaningful 
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-user/model.git
+git clone https://github.com/flowagi-eu/model.js
 ```
 
 Then import `Model` directly:
