@@ -77,6 +77,38 @@ git clone https://github.com/your-user/model.git
 | `List(class)` | `cards: List(UserCard)`       |
 | `List(shape)` | `items: List({ id: Number })` |
 
+### Custom validation
+
+Use `shapeFns` for additional validation rules beyond the basic types:
+
+```js
+class User extends Model {
+  static shape = {
+    name: String,
+    age: Number
+  };
+
+  static shapeFns = {
+    name: value =>
+      value.length >= 2
+        ? [0]
+        : [1, "Name must be at least 2 characters"],
+
+    age: value =>
+      value >= 18
+        ? [0]
+        : [1, "User must be at least 18 years old"]
+  };
+}
+```
+
+`shapeFns` functions receive the value and complete props object. Return `[0]` for success or `[1, error]` for failure.
+
+```js
+User.create({ name: "John", age: 25 }); // ✓
+User.create({ name: "J", age: 25 });    // throws
+```
+
 
 
 ## Working with Web Components?
