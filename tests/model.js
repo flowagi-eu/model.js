@@ -1,4 +1,4 @@
-import { Model,List } from '../model.js';
+import { Model } from '../model.js';
 
 
 // ─────────────────────────────────────────────
@@ -78,8 +78,8 @@ try {
     }),
 
     address: Address.create({
-      city: "Malaga",
-      country: "Spain"
+      city: "Amsterdam",
+      country: "The Netherlands"
     }),
 
     roles: ["admin", "user"]
@@ -92,7 +92,64 @@ try {
 
 
 // ─────────────────────────────────────────────
-// Demo 4: Invalid type
+// Demo 4: Custom shape functions
+// ─────────────────────────────────────────────
+
+class Customer extends Model {
+  static shape = {
+    name: String,
+    email: String,
+    age: Number
+  };
+
+  static shapeFns = {
+    name: value =>
+      value.length >= 2
+        ? [0]
+        : [1, "Name must be at least 2 characters"],
+
+    email: value =>
+      value.includes("@")
+        ? [0]
+        : [1, "Email must contain @"],
+
+    age: value =>
+      value >= 18
+        ? [0]
+        : [1, "Customer must be at least 18 years old"]
+  };
+}
+
+try {
+  const customer = Customer.create({
+    name: "John",
+    email: "john@example.com",
+    age: 25
+  });
+
+  console.log("Customer:", customer);
+} catch (error) {
+  console.error(error.message);
+}
+
+
+// ─────────────────────────────────────────────
+// Demo 5: Custom function failure
+// ─────────────────────────────────────────────
+
+try {
+  Customer.create({
+    name: "J",
+    email: "john@example.com",
+    age: 25
+  });
+} catch (error) {
+  console.error("Shape function:", error.message);
+}
+
+
+// ─────────────────────────────────────────────
+// Demo 6: Invalid type
 // ─────────────────────────────────────────────
 
 try {
@@ -106,7 +163,7 @@ try {
 
 
 // ─────────────────────────────────────────────
-// Demo 5: Missing field
+// Demo 7: Missing field
 // ─────────────────────────────────────────────
 
 try {
@@ -119,7 +176,7 @@ try {
 
 
 // ─────────────────────────────────────────────
-// Demo 6: Unknown field
+// Demo 8: Unknown field
 // ─────────────────────────────────────────────
 
 try {
@@ -134,7 +191,7 @@ try {
 
 
 // ─────────────────────────────────────────────
-// Demo 7: Direct construction is forbidden
+// Demo 9: Direct construction is forbidden
 // ─────────────────────────────────────────────
 
 try {
@@ -144,4 +201,24 @@ try {
   });
 } catch (error) {
   console.error("Direct construction:", error.message);
+}
+
+class DeepUser extends Model {
+  static shape = {
+    name: Object
+  };
+}
+
+const depth = 10000;
+
+let deep = { value: "bottom" };
+
+for (let i = 0; i < depth; i++) {
+  deep = { name: deep };
+}
+
+try {
+  DeepUser.create(deep);
+} catch (error) {
+  console.error("Deep object rejected:", error.message);
 }
