@@ -2,7 +2,7 @@
 
 A tiny base class for creating and validating **domain objects**.
 
-Backend code often passes plain objects everywhere, leaving validation scattered across the application. `Model` gives meaningful concepts a small, explicit JavaScript definition without turning them into complex entities.
+Backend code often passes plain objects everywhere, leaving validation scattered across the application. `Model` gives meaningful concepts a small, explicit JavaScript shape definition without turning them into complex entities.
 
 
 ## Usage
