@@ -2,7 +2,7 @@
 
 A tiny base class for creating and validating **domain objects**.
 
-Backend code often passes plain objects everywhere, leaving validation scattered across the application. `Model` gives meaningful concepts a small, explicit JavaScript shape definition without turning them into complex entities.
+JS functions often pass plain objects everywhere, leaving validation scattered across the application. `Model` gives meaningful concepts a small, explicit JavaScript shape definition without turning them into complex entities.
 
 
 ## Usage
@@ -61,3 +61,6 @@ git clone https://github.com/your-user/model.git
 | Runtime validation | **Yes** | Yes |      Yes |       Yes |     Yes |    Yes |
 | Database / ORM     |      No |  No |      Yes |       Yes |     Yes |    Yes |
 
+
+## Working with Web Components?
+Try [Flo Shapes](https://github.com/flowagi-eu/flo-webcomponents) instead.
