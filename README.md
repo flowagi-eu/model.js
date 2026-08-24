@@ -63,4 +63,4 @@ git clone https://github.com/your-user/model.git
 
 
 ## Working with Web Components?
-Try [Flo Shapes](https://github.com/flowagi-eu/flo-webcomponents) instead.
+Try [Flo Shapes](https://github.com/flowagi-eu/flo-plugin-shapes) instead.
